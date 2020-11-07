@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
+import { Button, Card, Icon, Statistic } from 'semantic-ui-react'
+import './Counter.css'
 
 type CounterProps = {
   initialCount: number
@@ -8,12 +10,12 @@ const Counter: FC<CounterProps> = ({ initialCount }) => {
   const [count, setCount] = useState(initialCount)
 
   return (
-    <div className="counter">
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
+    <Card>
+      <p className="header">You clicked {count} times</p>
+      <Button color="blue" onClick={() => setCount(count + 1)}>
         Click me
-      </button>
-    </div>
+      </Button>
+    </Card>
   )
 }
 
