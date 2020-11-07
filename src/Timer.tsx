@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+// import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, Card, Icon, Statistic } from 'semantic-ui-react'
-import { getPrimes } from './utils/math-tool'
+//import { getPrimes } from './utils/math-tool'
 import './Timer.css';
 
 type TimerProps = {
@@ -9,24 +10,27 @@ type TimerProps = {
 
 const Timer: FC<TimerProps> = ({ limit }) => {
   const [timeLeft, setTimeLeft] = useState(limit)
-  const primes = useMemo(() => getPrimes(limit), [limit]); const reset = () => setTimeLeft(limit)
+
+  //const primes = useMemo(() => getPrimes(limit), [limit])
+
+  const reset = () => setTimeLeft(limit)
   const tick = () => setTimeLeft((t) => t - 1)
   
   useEffect(() => {
     const timerId = setInterval(tick, 1000)
     return () => clearInterval(timerId)
-  }, []
-)
+  }, [])
 
-useEffect(() => {
-  if (timeLeft === 0) setTimeLeft(limit)
-}, [timeLeft, limit])
+  useEffect(() => {
+    if (timeLeft === 0) setTimeLeft(limit)
+  }, [timeLeft, limit])
   
   return ( 
     <Card>
       <Statistic className="number-board">
         <Statistic.Label>time</Statistic.Label>
-        <Statistic.Value className={primes.includes(timeLeft) ? 'prime-number' : undefined} >
+        <Statistic.Value>
+        {/* <Statistic.Value className={primes.includes(timeLeft) ? 'prime-number' : undefined} > */}
           {timeLeft}
         </Statistic.Value>
       </Statistic>
@@ -37,7 +41,7 @@ useEffect(() => {
         </Button>
       </Card.Content>
     </Card>
-  );
-};
+  )
+}
 
 export default Timer
